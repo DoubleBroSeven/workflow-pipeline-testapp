@@ -1,0 +1,12 @@
+{
+  "gitHost": "github",
+  "ciPlatform": "none",
+  "packageManager": "none",
+  "language": "python",
+  "testRunner": "pytest",
+  "monorepo": false,
+  "ticketing": "file-based",
+  "notifications": "none",
+  "calendar": "none",
+  "branchStrategy": "feature-branch"
+}

@@ -1,0 +1,19 @@
+[project]
+name = "linkctl"
+version = "0.1.0"
+description = "A simplified link shortener — E2E test consumer for workflow-pipeline"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.34.0",
+    "click>=8.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "httpx>=0.28.0",
+]
+
+[project.scripts]
+linkctl = "linkctl.cli:main"
