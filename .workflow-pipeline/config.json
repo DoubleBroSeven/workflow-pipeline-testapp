@@ -5,7 +5,7 @@
   "language": "python",
   "testRunner": "pytest",
   "monorepo": false,
-  "ticketing": "file-based",
+  "ticketing": "github-issues",
   "notifications": "none",
   "calendar": "none",
   "branchStrategy": "feature-branch"
