@@ -1,17 +1,28 @@
 """LinkCtl server — FastAPI application factory."""
 
+import logging
 import time
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-_start_time: float = time.monotonic()
+logger = logging.getLogger("linkctl")
 
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
-    app = FastAPI(title="LinkCtl", version="0.1.0")
+    state = {"start_time": time.monotonic()}
+
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        state["start_time"] = time.monotonic()
+        logger.info("LinkCtl server started")
+        yield
+        logger.info("LinkCtl server shutting down")
+
+    app = FastAPI(title="LinkCtl", version="0.1.0", lifespan=lifespan)
 
     @app.exception_handler(StarletteHTTPException)
     async def http_exception_handler(request: Request, exc: StarletteHTTPException):
@@ -32,7 +43,7 @@ def create_app() -> FastAPI:
         return {
             "status": "ok",
             "version": app.version,
-            "uptime_seconds": round(time.monotonic() - _start_time, 2),
+            "uptime_seconds": round(time.monotonic() - state["start_time"], 2),
         }
 
     return app
