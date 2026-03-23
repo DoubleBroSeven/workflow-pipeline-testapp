@@ -2,7 +2,9 @@
 
 import time
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 _start_time: float = time.monotonic()
 
@@ -10,6 +12,20 @@ _start_time: float = time.monotonic()
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
     app = FastAPI(title="LinkCtl", version="0.1.0")
+
+    @app.exception_handler(StarletteHTTPException)
+    async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"error": {"status_code": exc.status_code, "detail": exc.detail}},
+        )
+
+    @app.exception_handler(Exception)
+    async def unhandled_exception_handler(request: Request, exc: Exception):
+        return JSONResponse(
+            status_code=500,
+            content={"error": {"status_code": 500, "detail": "Internal server error"}},
+        )
 
     @app.get("/health")
     def health():
