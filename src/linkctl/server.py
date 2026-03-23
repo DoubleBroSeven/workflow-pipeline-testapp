@@ -1,10 +1,17 @@
-"""LinkCtl server — stub for workflow-pipeline E2E testing."""
+"""LinkCtl server — FastAPI application factory."""
 
 from fastapi import FastAPI
 
-app = FastAPI(title="LinkCtl", version="0.1.0")
+
+def create_app() -> FastAPI:
+    """Create and configure the FastAPI application."""
+    app = FastAPI(title="LinkCtl", version="0.1.0")
+
+    @app.get("/health")
+    def health():
+        return {"status": "ok"}
+
+    return app
 
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+app = create_app()
