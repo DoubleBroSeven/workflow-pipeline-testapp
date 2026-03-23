@@ -1,6 +1,10 @@
 """LinkCtl server — FastAPI application factory."""
 
+import time
+
 from fastapi import FastAPI
+
+_start_time: float = time.monotonic()
 
 
 def create_app() -> FastAPI:
@@ -9,7 +13,11 @@ def create_app() -> FastAPI:
 
     @app.get("/health")
     def health():
-        return {"status": "ok"}
+        return {
+            "status": "ok",
+            "version": app.version,
+            "uptime_seconds": round(time.monotonic() - _start_time, 2),
+        }
 
     return app
 
