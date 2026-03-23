@@ -6,8 +6,8 @@ status: backlog
 ac_status: pending
 depends_on: []
 blocks: []
-branch: feature/{epic-slug}/{epic-slug}-{NNN}
-pr_target: feature/{epic-slug}
+branch: {epic-slug}/{epic-slug}-{NNN}
+pr_target: epic/{epic-slug}
 effort: medium
 created: "{date}"
 started: ""

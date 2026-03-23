@@ -6,7 +6,7 @@ effort: medium
 impact: medium
 ac_status: pending
 source_tasks: []
-feature_branch: feature/{epic-slug}
+feature_branch: epic/{epic-slug}
 created: "{date}"
 approved: ""
 completed: ""
