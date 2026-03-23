@@ -1,8 +1,8 @@
 {
   "ticketId": "E1-003",
-  "epicId": "E1",
-  "step": "epic-approved",
+  "epicId": null,
+  "step": "ticket-ready",
   "branch": null,
-  "timestamp": "2026-03-22T19:28:29.903Z",
+  "timestamp": "2026-03-23T17:24:27.943Z",
   "metadata": {}
 }
